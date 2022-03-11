@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Tank;
+use App\Repository\TankRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class VoitureController extends AbstractController
+{
+    #[Route('/voiture', name: 'app_voiture')]
+    public function index(): Response
+    {
+        return $this->render('voiture/index.html.twig', [
+            'controller_name' => 'VoitureController',
+        ]);
+    }
+    #[Route('/tank', name: 'tank')]
+    public function tank(TankRepository $tankRepository): Response
+    {
+        return $this->render('voiture/tank.html.twig', [
+            'tanks' => $tankRepository->findAll(),
+        ]);
+    }
+}
